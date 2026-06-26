@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 - Сторінку не знайдено</title>
+<link rel="icon" type="image/png" href="Icon.png">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:linear-gradient(135deg,#0a0f2c 0%,#1a1f4b 50%,#0f1535 100%);
+    color:white;
+    min-height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.bg-animation{
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    z-index:1;
+    opacity:0.12;
+}
+
+.symbol{
+    position:absolute;
+    color:#0066cc;
+    font-family:'JetBrains Mono',monospace;
+    font-size:24px;
+    animation:float-up linear infinite;
+}
+
+@keyframes float-up{
+    from{
+        transform:translateY(100vh) rotate(0deg);
+        opacity:0;
+    }
+    to{
+        transform:translateY(-100vh) rotate(360deg);
+        opacity:1;
+    }
+}
+
+.error-container{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    max-width:700px;
+    padding:30px;
+}
+
+.error-code{
+    font-size:180px;
+    font-weight:700;
+    line-height:1;
+    font-family:'JetBrains Mono', monospace;
+
+    background: linear-gradient(135deg, #0066cc, #00b4ff);
+
+    background-clip: text;
+    -webkit-background-clip: text;
+
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+.error-title{
+    font-size:36px;
+    margin-bottom:20px;
+    color:#00b4ff;
+}
+
+.error-text{
+    font-size:18px;
+    color:#8899cc;
+    line-height:1.6;
+    margin-bottom:40px;
+}
+
+.btn{
+    padding:15px 35px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+    background:linear-gradient(135deg,#0066cc,#00b4ff);
+    color:white;
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 40px rgba(0,102,204,0.4);
+}
+
+.code-line{
+    margin-top:25px;
+    color:#4ade80;
+    font-family:'JetBrains Mono',monospace;
+    font-size:14px;
+}
+</style>
+</head>
+<body>
+
+<div class="bg-animation" id="bg-animation"></div>
+
+<div class="error-container">
+
+    <div class="error-code">404</div>
+
+    <h1 class="error-title">Сторінку не знайдено</h1>
+
+    <p class="error-text">
+        Схоже, що ви перейшли за неправильним посиланням або сторінка була переміщена.
+        Не хвилюйтесь — поверніться на головну сторінку та продовжуйте вивчати програмування!
+    </p>
+
+    <button class="btn" onclick="window.location.href='index.html'">
+        🏠 На головну
+    </button>
+
+    <div class="code-line">
+        Error: PageNotFoundException();
+    </div>
+
+</div>
+
+<script>
+const symbols = [
+    "<>",
+    "{}",
+    "[]",
+    "()",
+    "//",
+    "==",
+    "!=",
+    "&&",
+    "||",
+    "++",
+    "--"
+];
+
+const bg = document.getElementById("bg-animation");
+
+function createSymbol(){
+    const el = document.createElement("div");
+    el.className = "symbol";
+    el.textContent = symbols[Math.floor(Math.random()*symbols.length)];
+
+    el.style.left = Math.random()*window.innerWidth + "px";
+    el.style.animationDuration = (Math.random()*15+10)+"s";
+
+    bg.appendChild(el);
+
+    setTimeout(()=>{
+        el.remove();
+    },25000);
+}
+
+setInterval(createSymbol,300);
+</script>
+
+</body>
+</html>
